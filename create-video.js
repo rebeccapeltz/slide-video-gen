@@ -2,11 +2,13 @@ require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 const axios = require("axios");
 
+const publicId = "slides_1";
+
 const config = cloudinary.config();
 const cloudName = config.cloud_name;
 const apiKey = config.api_key;
 const apiSecret = config.api_secret;
-const notificationUrl = "https://webhook.site/a7cbf678-adf7-4847-8586-96e6825cea46";
+// const notificationUrl = "https://webhook.site/a7cbf678-adf7-4847-8586-96e6825cea46";
 
 // const apiSecret = config.api_secret;
 // console.log(apiSecret);
@@ -14,29 +16,34 @@ const notificationUrl = "https://webhook.site/a7cbf678-adf7-4847-8586-96e6825cea
 // console.log("cloud config", cloudinary.config());
 const timestamp = Math.floor(new Date().getTime() / 1000);
 console.log("timestamp", timestamp);
-const publicId = "test_slide_video_2";
-const replace = true;
+
 const manifest = {
   w: 500,
   h: 500,
-  du: 13,
+  du: 30,
   fps: 20,
   vars: {
-    transition_s: "circledrop",
+    transition_s: "s:circledrop",
     sdur: 3000,
     tdur: 1500,
     slides: [
       {
-        media: "i:test_000",
+        media: "i:slides_000",
       },
       {
-        media: "i:test_001",
+        media: "i:slides_001",
       },
       {
-        media: "i:test_000",
+        media: "i:slides_002",
       },
       {
-        media: "i:test_001",
+        media: "i:slides_003",
+      },
+      {
+        media: "i:slides_004",
+      },
+      {
+        media: "i:slides_005",
       },
     ],
   },
@@ -53,10 +60,11 @@ function createVideo() {
   console.log("params:", paramsToSign);
   const signature = cloudinary.utils.api_sign_request(paramsToSign, apiSecret);
   console.log("sig", signature);
+  // notification_url: "https://webhook.site/a7cbf678-adf7-4847-8586-96e6825cea46",
+
   const body = {
     public_id: publicId,
     api_key: apiKey,
-    notification_url: "https://webhook.site/a7cbf678-adf7-4847-8586-96e6825cea46",
     resource_type: "video",
     timestamp: timestamp,
     signature: signature,

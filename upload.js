@@ -17,5 +17,7 @@ function uploadImage (fn) {
     .catch(error => console.error(error))
 }
 
-uploadImage('./test_000.png')
-uploadImage('./test_001.png')
+
+for (let i =0; i<=5; i++){
+  uploadImage(`./slides_00${i}.png`);
+}
