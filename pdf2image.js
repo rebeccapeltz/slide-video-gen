@@ -23,6 +23,14 @@ const cloudinary = require("cloudinary").v2;
 //   .catch((error) => {
 //     console.log(error);
 //   });
-cloudinary.uploader.explode('TestSlide', 
-  { page: 'all'},
-  function(error,result) {console.log(result, error) });
+// cloudinary.uploader.explode('Test_Slides.pdf', 
+//   { page: 'all'},
+//   function(error,result) {console.log(result, error) });
+
+const page3 = cloudinary.url("TestSlide.png", {transformation: [
+  {width: 400, crop: "scale"},
+  {page: 3},
+  {format: "png"}
+  ]},
+)
+  console.log(page3)
